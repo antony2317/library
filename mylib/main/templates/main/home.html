@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Мой сайт{% endblock %}
+{% block extra_css %}
+    <link type="text/css" href="{% static 'main/css/home.css'%}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="welcome">
+    <h2>Добро пожаловать в нашу библиотеку!</h2>
+    <p>Здесь вы найдете тысячи книг на любой вкус. Мы предлагаем широкий выбор литературы: от классики до современных бестселлеров.</p>
+</div>
+
+<div class="features">
+    <h3>Популярные разделы</h3>
+    <ul>
+        <li><a href="#">Фантастика</a></li>
+        <li><a href="#">Детективы</a></li>
+        <li><a href="#">Романы</a></li>
+        <li><a href="#">Научная литература</a></li>
+    </ul>
+</div>
+
+<div class="latest-books">
+    <h3>Новинки</h3>
+    <div class="books-list">
+        <div class="book">
+            <h4>Название книги 1</h4>
+            <p>Автор: Автор 1</p>
+            <p>Год издания: 2023</p>
+        </div>
+        <div class="book">
+            <h4>Название книги 2</h4>
+            <p>Автор: Автор 2</p>
+            <p>Год издания: 2023</p>
+        </div>
+        <div class="book">
+            <h4>Название книги 3</h4>
+            <p>Автор: Автор 3</p>
+            <p>Год издания: 2023</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,130 @@
+/* Стили для блока welcome */
+.welcome {
+    text-align: center;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    border-radius: 10px;
+    margin: 20px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.welcome h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.welcome p {
+    font-size: 1.2em;
+    line-height: 1.6;
+}
+
+/* Стили для блока features */
+.features {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.features h3 {
+    font-size: 2em;
+    color: #2575fc;
+    margin-bottom: 20px;
+}
+
+.features ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.features ul li {
+    flex: 1 1 calc(25% - 15px);
+    text-align: center;
+}
+
+.features ul li a {
+    text-decoration: none;
+    color: #2575fc;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.features ul li a:hover {
+    background-color: rgba(37, 117, 252, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Стили для блока latest-books */
+.latest-books {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.latest-books h3 {
+    font-size: 2em;
+    color: #2575fc;
+    margin-bottom: 20px;
+}
+
+.books-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.book {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    flex: 1 1 calc(33.333% - 20px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.book:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.book h4 {
+    font-size: 1.5em;
+    color: #2575fc;
+    margin-bottom: 10px;
+}
+
+.book p {
+    font-size: 1em;
+    color: #555;
+    margin: 5px 0;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .features ul li {
+        flex: 1 1 calc(50% - 15px);
+    }
+
+    .book {
+        flex: 1 1 calc(50% - 20px);
+    }
+}
+
+@media (max-width: 480px) {
+    .features ul li {
+        flex: 1 1 100%;
+    }
+
+    .book {
+        flex: 1 1 100%;
+    }
+}
