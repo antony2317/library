@@ -1,0 +1,75 @@
+/* Стили для страницы каталога книг */
+.catalog-page {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.catalog-page h1 {
+    text-align: center;
+    color: #2575fc;
+    margin-bottom: 30px;
+}
+
+.books-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;  /* Расстояние между карточками */
+}
+
+/* Стили для ссылки-карточки */
+a.book-link {
+    text-decoration: none !important;  /* Принудительно убираем подчеркивание */
+    color: inherit !important;  /* Наследуем цвет текста */
+    display: block;  /* Делаем ссылку блочным элементом */
+    flex: 1 1 calc(50% - 20px);  /* Две карточки в ряд */
+    box-sizing: border-box;  /* Учитываем padding и border в ширине */
+}
+
+/* Стили для карточки книги */
+.book {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Анимация при наведении на карточку */
+.book-link:hover .book {
+    transform: translateY(-5px);  /* Поднимаем карточку при наведении */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);  /* Увеличенная тень */
+}
+
+/* Стили для обложки книги */
+.book-cover {
+    width: 100px;  /* Фиксированная ширина */
+    height: auto;  /* Высота изменяется пропорционально */
+    border-radius: 5px;
+    margin-top: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Стили для сообщения "Обложка отсутствует" */
+.no-cover {
+    width: 100px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    color: #555;
+    font-style: italic;
+    margin-top: 10px;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+    .book-link {
+        flex: 1 1 100%;  /* Одна карточка в ряд на мобильных */
+    }
+}

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ book.title }}{% endblock %}
+
+{% block extra_css %}
+    <link type="text/css" href="{% static 'main/css/book_detail.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="book-detail">
+    <!-- Фото автора в правом верхнем углу -->
+
+
+    <h1>{{ book.title }}</h1>
+    <div class="book-header">
+        {% if book.cover_image %}
+            <img src="{{ book.cover_image.url }}" alt="{{ book.title }}" class="book-cover">
+        {% else %}
+            <p class="no-cover">Обложка отсутствует</p>
+        {% endif %}
+            {% if book.author_image %}
+        <div class="author-image-container">
+            <img src="{{ book.author_image.url }}" alt="{{ book.author }}" class="author-image">
+        </div>
+    {% endif %}
+        <div class="book-info">
+            <p><strong>Автор:</strong> {{ book.author }}</p>
+            <p><strong>Дата публикации:</strong> {{ book.published_date }}</p>
+            <p><strong>ISBN:</strong> {{ book.isbn }}</p>
+        </div>
+    </div>
+    <div class="book-description">
+        <h3>Описание</h3>
+        <p>{{ book.description }}</p>
+    </div>
+    {% if user.is_authenticated %}
+        {% if not is_booked %}
+            <form method="post" action="{% url 'reserve_book' book.id %}">
+                {% csrf_token %}
+                <button type="submit" class="reserve-button">Забронировать на 2 недели</button>
+            </form>
+        {% else %}
+            <p class="reservation-info">Эта книга уже забронирована.</p>
+        {% endif %}
+    {% else %}
+        <p class="reservation-info">Чтобы забронировать книгу, <a href="{% url 'users:login' %}">войдите в систему</a>.</p>
+    {% endif %}
+</div>
+{% endblock %}
