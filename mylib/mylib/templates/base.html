@@ -1,10 +1,11 @@
+    {% load static %}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Мой сайт{% endblock %}</title>
-    {% load static %}
+
     <link type="text/css" href="{% static 'main/css/styles.css'%}" rel="stylesheet">
     {% block extra_css %}{% endblock %}
 </head>
@@ -12,13 +13,13 @@
     <header>
         <nav>
             <ul class="menu">
-                <li><a href="#">Главная страница</a></li>
-                <li><a href="#">Каталог книг</a></li>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li><a href="{% url 'catalog' %}">Каталог книг</a></li>
                 {% if not user.is_authenticated %}
-                    <li class="right"><a href="#">Вход</a></li>
-                    <li><a href="#">Регистрация</a></li>
+                    <li class="right"><a href="{% url 'users:login' %}">Вход</a></li>
+                    <li><a href="{% url 'users:register' %}">Регистрация</a></li>
                 {% else %}
-                    <li class="right"><a href="#">Выйти</a></li>
+                    <li class="right"><a href="{% url 'users:logout' %}">Выйти</a></li>
                 {% endif %}
             </ul>
         </nav>

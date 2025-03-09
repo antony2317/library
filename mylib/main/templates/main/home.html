@@ -25,21 +25,18 @@
 <div class="latest-books">
     <h3>Новинки</h3>
     <div class="books-list">
-        <div class="book">
-            <h4>Название книги 1</h4>
-            <p>Автор: Автор 1</p>
-            <p>Год издания: 2023</p>
-        </div>
-        <div class="book">
-            <h4>Название книги 2</h4>
-            <p>Автор: Автор 2</p>
-            <p>Год издания: 2023</p>
-        </div>
-        <div class="book">
-            <h4>Название книги 3</h4>
-            <p>Автор: Автор 3</p>
-            <p>Год издания: 2023</p>
-        </div>
+        {% for book in latest_books %}
+            <div class="book">
+                <h4>{{ book.title }}</h4>
+                <p><strong>Автор:</strong> {{ book.author }}</p>
+                <p><strong>Год издания:</strong> {{ book.published_date }}</p>
+                {% if book.cover_image %}
+                    <img src="{{ book.cover_image.url }}" alt="{{ book.title }}" class="book-cover">
+                {% else %}
+                    <p class="no-cover">Обложка отсутствует</p>
+                {% endif %}
+            </div>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}
