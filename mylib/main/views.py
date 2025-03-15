@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 
-from .models import Book, Reservation
+from .models import Book, Reservation, Genre
 
 
 def index(request):
@@ -12,8 +12,16 @@ def index(request):
 
 
 def book_catalog(request):
-    books = Book.objects.all()
-    return render(request, 'main/book_catalog.html', {'books': books})
+    genre = request.GET.get('genre')  # Получаем жанр из параметра URL
+    if genre:
+        books = Book.objects.filter(genre__name=genre)  # Фильтруем книги по названию жанра
+    else:
+        books = Book.objects.all()  # Если жанр не указан, показываем все книги
+
+    # Получаем список всех уникальных жанров для отображения в фильтре
+    genres = Genre.objects.all()
+
+    return render(request, 'main/book_catalog.html', {'books': books, 'genres': genres})
 
 
 def book_detail(request, book_id):
@@ -41,3 +49,6 @@ def reserve_book(request, book_id):
         messages.success(request, "Книга успешно забронирована на 2 недели.")
 
     return redirect('book_detail', book_id=book.id)
+
+
+

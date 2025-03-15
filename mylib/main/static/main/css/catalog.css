@@ -14,6 +14,62 @@
     margin-bottom: 30px;
 }
 
+.genre-filter {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+}
+
+.genre-filter h3 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.genre-filter ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex; /* Делаем список горизонтальным */
+    flex-wrap: wrap; /* Перенос элементов на новую строку, если не хватает места */
+    gap: 10px; /* Расстояние между элементами */
+}
+
+.genre-filter ul li {
+    margin: 0; /* Убираем отступы между элементами */
+}
+
+.genre-filter ul li a {
+    text-decoration: none;
+    color: #555;
+    font-size: 16px;
+    display: block;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    background-color: #e9ecef; /* Фон для каждого элемента */
+}
+
+.genre-filter ul li a:hover {
+    background-color: #007bff;
+    color: #fff;
+    transform: translateY(-2px); /* Эффект приподнятости при наведении */
+}
+
+.genre-filter ul li a[href="?"] {
+    font-weight: bold;
+    color: #007bff;
+    background-color: transparent; /* Убираем фон для "Все жанры" */
+}
+
+.genre-filter ul li a[href="?"]:hover {
+    background-color: #0056b3;
+    color: #fff;
+}
+
 .books-list {
     display: flex;
     flex-wrap: wrap;
@@ -67,9 +123,9 @@ a.book-link {
     margin-top: 10px;
 }
 
-/* Адаптивность для мобильных устройств */
+
 @media (max-width: 768px) {
     .book-link {
-        flex: 1 1 100%;  /* Одна карточка в ряд на мобильных */
+        flex: 1 1 100%;
     }
 }

@@ -1,7 +1,7 @@
 from django.contrib import admin
-from .models import Book, Category
+from .models import Book, Genre
 
-admin.site.register(Category)
+admin.site.register(Genre)
 
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):

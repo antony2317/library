@@ -3,7 +3,7 @@ from django.db import models
 from django.utils import timezone
 
 
-class Category(models.Model):
+class Genre(models.Model):
     name = models.CharField(max_length=100, unique=True, verbose_name="Название категории")
 
     def __str__(self):
@@ -17,7 +17,7 @@ class Book(models.Model):
     isbn = models.CharField(max_length=13, unique=True, verbose_name="ISBN")
     cover_image = models.ImageField(upload_to='covers/', blank=True, null=True, verbose_name="Обложка книги")
     author_image = models.ImageField(upload_to='authors/', blank=True, null=True, verbose_name="Обложка автора")
-    categories = models.ManyToManyField(Category, blank=True, verbose_name="Категории")
+    genre = models.ForeignKey('Genre', on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Жанр")
 
     def __str__(self):
         return self.title
