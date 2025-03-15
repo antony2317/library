@@ -40,11 +40,14 @@ def reserve_book(request, book_id):
     book = get_object_or_404(Book, id=book_id)
 
     # Проверяем, не забронирована ли книга уже
-    if Reservation.objects.filter(book=book, expires_at__gt=timezone.now()).exists():
-        messages.error(request, "Эта книга уже забронирована.")
+    active_reservation = Reservation.objects.filter(book=book, expires_at__gt=timezone.now()).first()
+
+    if active_reservation:
+        messages.error(request, f"Эта книга уже забронирована пользователем {active_reservation.user.username}.")
     else:
         # Создаем бронирование
-        reservation = Reservation(book=book, user=request.user)
+        expires_at = timezone.now() + timezone.timedelta(weeks=2)  # Бронирование на 2 недели
+        reservation = Reservation(book=book, user=request.user, expires_at=expires_at)
         reservation.save()
         messages.success(request, "Книга успешно забронирована на 2 недели.")
 

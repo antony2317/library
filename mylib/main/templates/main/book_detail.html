@@ -41,7 +41,10 @@
                 <button type="submit" class="reserve-button">Забронировать на 2 недели</button>
             </form>
         {% else %}
-            <p class="reservation-info">Эта книга уже забронирована.</p>
+            <p class="reservation-info">
+                Эта книга уже забронирована
+                <strong>{{ book.reserved_by.username }}</strong>
+            </p>
         {% endif %}
     {% else %}
         <p class="reservation-info">Чтобы забронировать книгу, <a href="{% url 'users:login' %}">войдите в систему</a>.</p>

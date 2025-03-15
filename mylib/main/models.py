@@ -18,6 +18,7 @@ class Book(models.Model):
     cover_image = models.ImageField(upload_to='covers/', blank=True, null=True, verbose_name="Обложка книги")
     author_image = models.ImageField(upload_to='authors/', blank=True, null=True, verbose_name="Обложка автора")
     genre = models.ForeignKey('Genre', on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Жанр")
+    reserved_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='reserved_books')
 
     def __str__(self):
         return self.title
