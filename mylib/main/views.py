@@ -2,8 +2,10 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
+from rest_framework import viewsets
 
 from .models import Book, Reservation, Genre
+from .serializers import BookSerializer
 
 
 def index(request):
@@ -12,13 +14,13 @@ def index(request):
 
 
 def book_catalog(request):
-    genre = request.GET.get('genre')  # Получаем жанр из параметра URL
+    genre = request.GET.get('genre')
     if genre:
-        books = Book.objects.filter(genre__name=genre)  # Фильтруем книги по названию жанра
+        books = Book.objects.filter(genre__name=genre)
     else:
-        books = Book.objects.all()  # Если жанр не указан, показываем все книги
+        books = Book.objects.all()
 
-    # Получаем список всех уникальных жанров для отображения в фильтре
+
     genres = Genre.objects.all()
 
     return render(request, 'main/book_catalog.html', {'books': books, 'genres': genres})
@@ -27,26 +29,26 @@ def book_catalog(request):
 def book_detail(request, book_id):
     book = get_object_or_404(Book, id=book_id)
 
-    # Проверяем, есть ли активные бронирования для этой книги
+
     is_booked = book.reservations.filter(expires_at__gt=timezone.now()).exists()
 
     return render(request, 'main/book_detail.html', {
         'book': book,
-        'is_booked': is_booked,  # Передаем результат в шаблон
+        'is_booked': is_booked,
     })
 
 @login_required
 def reserve_book(request, book_id):
     book = get_object_or_404(Book, id=book_id)
 
-    # Проверяем, не забронирована ли книга уже
+
     active_reservation = Reservation.objects.filter(book=book, expires_at__gt=timezone.now()).first()
 
     if active_reservation:
         messages.error(request, f"Эта книга уже забронирована пользователем {active_reservation.user.username}.")
     else:
         # Создаем бронирование
-        expires_at = timezone.now() + timezone.timedelta(weeks=2)  # Бронирование на 2 недели
+        expires_at = timezone.now() + timezone.timedelta(weeks=2)
         reservation = Reservation(book=book, user=request.user, expires_at=expires_at)
         reservation.save()
         messages.success(request, "Книга успешно забронирована на 2 недели.")
@@ -54,4 +56,6 @@ def reserve_book(request, book_id):
     return redirect('book_detail', book_id=book.id)
 
 
-
+class BookViewSet(viewsets.ModelViewSet):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
